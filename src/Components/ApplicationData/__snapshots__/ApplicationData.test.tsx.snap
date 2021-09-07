@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ApplicationData renders according to snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="filteredData_y1oc3f"
+    data-testid="app-7"
+  >
+    <span>
+      Application 7
+    </span>
+    <span>
+      Business Capability 1
+    </span>
+    <span>
+      Business Capability 1.1
+    </span>
+    <span>
+      Business Capability 1.1.2
+    </span>
+    <span>
+      Total spend: $20000
+    </span>
+  </div>
+  <div
+    class="filteredData_y1oc3f"
+    data-testid="app-8"
+  >
+    <span>
+      Application 8
+    </span>
+    <span>
+      Business Capability 1
+    </span>
+    <span>
+      Business Capability 1.2
+    </span>
+    <span>
+      Business Capability 1.2.2
+    </span>
+    <span>
+      Total spend: $56205
+    </span>
+  </div>
+  <div
+    class="filteredData_y1oc3f"
+    data-testid="app-9"
+  >
+    <span>
+      Application 9
+    </span>
+    <span>
+      Business Capability 2
+    </span>
+    <span>
+      Business Capability 2.1
+    </span>
+    <span>
+      Business Capability 2.1.1
+    </span>
+    <span>
+      Total spend: $64792
+    </span>
+  </div>
+  <div
+    class="filteredData_y1oc3f"
+    data-testid="app-10"
+  >
+    <span>
+      Application 10
+    </span>
+    <span>
+      Business Capability 3
+    </span>
+    <span>
+      Business Capability 3.2
+    </span>
+    <span>
+      Business Capability 3.2.2
+    </span>
+    <span>
+      Total spend: $35651
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`first test renders according to snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="filteredData_y1oc3f"
+    data-testid="app-7"
+  >
+    <span>
+      Application 7
+    </span>
+    <span>
+      Business Capability 1
+    </span>
+    <span>
+      Business Capability 1.1
+    </span>
+    <span>
+      Business Capability 1.1.2
+    </span>
+    <span>
+      Total spend: $20000
+    </span>
+  </div>
+  <div
+    class="filteredData_y1oc3f"
+    data-testid="app-8"
+  >
+    <span>
+      Application 8
+    </span>
+    <span>
+      Business Capability 1
+    </span>
+    <span>
+      Business Capability 1.2
+    </span>
+    <span>
+      Business Capability 1.2.2
+    </span>
+    <span>
+      Total spend: $56205
+    </span>
+  </div>
+  <div
+    class="filteredData_y1oc3f"
+    data-testid="app-9"
+  >
+    <span>
+      Application 9
+    </span>
+    <span>
+      Business Capability 2
+    </span>
+    <span>
+      Business Capability 2.1
+    </span>
+    <span>
+      Business Capability 2.1.1
+    </span>
+    <span>
+      Total spend: $64792
+    </span>
+  </div>
+  <div
+    class="filteredData_y1oc3f"
+    data-testid="app-10"
+  >
+    <span>
+      Application 10
+    </span>
+    <span>
+      Business Capability 3
+    </span>
+    <span>
+      Business Capability 3.2
+    </span>
+    <span>
+      Business Capability 3.2.2
+    </span>
+    <span>
+      Total spend: $35651
+    </span>
+  </div>
+</DocumentFragment>
+`;

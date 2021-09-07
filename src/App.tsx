@@ -109,7 +109,7 @@ function App() {
     return (
         <div>
             <h1>Pharos Coding Exercise</h1>
-            <div className={css(styles.container)}>
+            <div style={styles.container}>
                 <div className={css(styles.left)}>
                     <h2>Navigation</h2>
                     {navigationData.map((value: NavigationData) =>
