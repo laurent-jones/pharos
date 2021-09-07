@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`List renders according to snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <span
+      class="titleContainer_13xlah4"
+      data-testid="Business Capability 1"
+    >
+      <h4
+        class="nonActiveChild_f17nnd"
+      >
+        Business Capability 1
+      </h4>
+    </span>
+    <div
+      class="listChildren_rpd3sa"
+    />
+  </div>
+</DocumentFragment>
+`;

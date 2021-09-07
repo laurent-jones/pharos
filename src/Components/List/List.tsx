@@ -1,7 +1,10 @@
 import React, {useCallback, useState} from "react";
 import {NavigationData} from "../../App";
+import {css} from "aphrodite/no-important";
+import styles from './List.styles';
 
 interface ListProps {
+    id: string;
     selectedfilter: string[];
     item: NavigationData;
     setSelectedFilter(filters: string[]): void;
@@ -22,24 +25,20 @@ const List: React.FC<ListProps> = (props: ListProps) => {
         }
         props.setSelectedFilter([...selectedFilteredList, props.item.title]);
     }, [showChildren, setShowChildren]);
+    // generate real GUID for better reconciliation process
+    let guid = 1;
     return (
-        <div>
-      <span style={{
-          cursor: 'pointer',
-      }} onClick={handleClick}>
-        <h4 style={{fontWeight: showChildren ? 'bold' : 'normal'}}>{props.item.title}</h4>
+        <div key={props.id}>
+      <span
+          data-testid={props.item.title}
+          className={css(styles.titleContainer)} onClick={handleClick}>
+        <h4 className={showChildren ? css(styles.activeChild) : css(styles.nonActiveChild)}>{props.item.title}</h4>
       </span>
-            <div style={{
-                position: 'relative',
-                display: 'flex',
-                flexDirection: 'column',
-                left: 25,
-                borderLeft: '1px solid',
-                paddingLeft: 15
-            }}>
+            <div key={props.id} className={css(styles.listChildren)}>
                 {showChildren && (props.item.children ?? []).map((node: any) =>
                     <List selectedfilter={props.selectedfilter} setSelectedFilter={props.setSelectedFilter}
-                          item={node}/>)}
+                          item={node} id={`${node.title}- ${++guid}`}
+                    />)}
             </div>
         </div>
     )

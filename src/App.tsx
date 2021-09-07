@@ -17,21 +17,13 @@ export interface Data {
     BCAP3: string;
     spend: number;
 }
-
-export type Children = {
-    title: string,
-    children?: Children
+type Title = {
+    title: string
 }
-
+// Use recursive type for children
 export interface NavigationData {
-    id: string;
-    name: string;
-    BCAP1: string;
-    BCAP2: string;
-    BCAP3: string;
-    spend: number;
     title: string;
-    children?: Children[];
+    children?: [NavigationData],
 }
 
 function App() {
@@ -109,13 +101,14 @@ function App() {
     return (
         <div>
             <h1>Pharos Coding Exercise</h1>
-            <div style={styles.container}>
+            <div className={css(styles.container)}>
                 <div className={css(styles.left)}>
                     <h2>Navigation</h2>
-                    {navigationData.map((value: NavigationData) =>
-                        <div>
+                    {navigationData.map((navItem: NavigationData, idx: number) =>
+                        <div key={navItem.title}>
                             <List
-                                item={value}
+                                id={`${navItem.title}- ${idx.toString()}`}
+                                item={navItem}
                                 selectedfilter={selectedFilter}
                                 setSelectedFilter={setSelectedFilter}/>
                         </div>
