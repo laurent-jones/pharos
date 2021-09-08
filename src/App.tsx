@@ -6,20 +6,10 @@ import 'rc-slider/assets/index.css';
 import List from "./Components/List/List";
 import ApplicationData from "./Components/ApplicationData/ApplicationData";
 import {unique} from "./utils/arrayHelpers";
+import {Data} from "./shared/types/Data";
 
 export type Dictionary<T> = Partial<{ [key: string]: T }>;
 
-export interface Data {
-    id: string;
-    name: string;
-    BCAP1: string;
-    BCAP2: string;
-    BCAP3: string;
-    spend: number;
-}
-type Title = {
-    title: string
-}
 // Use recursive type for children
 export interface NavigationData {
     title: string;
@@ -49,19 +39,19 @@ function App() {
             res.json().then((response: Data[]) => {
                     const navigationTree: Dictionary<NavigationData> = response.reduce((acc, curr: Data) => {
                         if (!acc[curr.BCAP1]) {
-                            const getChildren = (BCAP2Title: string) =>
+                            const getChildren = (bcap2title: string) =>
                                 response
-                                    .filter((d: Data) => d.BCAP1 === curr.BCAP1 && BCAP2Title === d.BCAP2)
-                                    .map((b: Data) => b.BCAP3)
+                                    .filter((data: Data) => data.BCAP1 === curr.BCAP1 && bcap2title === data.BCAP2)
+                                    .map((filteredData: Data) => filteredData.BCAP3)
                                     .filter(unique)
                                     .sort()
-                                    .map((a: string) => ({title: a}));
+                                    .map((bcapTitle: string) => ({title: bcapTitle}));
                             const sortedBCAP2 = response
-                                .filter((d: Data) => d.BCAP1 === curr.BCAP1)
-                                .map((b: Data) => b.BCAP2)
+                                .filter((data: Data) => data.BCAP1 === curr.BCAP1)
+                                .map((filteredData: Data) => filteredData.BCAP2)
                                 .filter(unique)
                                 .sort()
-                                .map((a: string) => ({title: a, children: getChildren(a)}));
+                                .map((bcapTitle: string) => ({title: bcapTitle, children: getChildren(bcapTitle)}));
 
                             acc = {
                                 ...acc,
@@ -109,7 +99,7 @@ function App() {
                             <List
                                 id={`${navItem.title}- ${idx.toString()}`}
                                 item={navItem}
-                                selectedfilter={selectedFilter}
+                                selectedFilter={selectedFilter}
                                 setSelectedFilter={setSelectedFilter}/>
                         </div>
                     )}

@@ -8,7 +8,7 @@ describe('List', () => {
     });
     const defaultProps = {
         setSelectedFilter: jest.fn(),
-        selectedfilter: [],
+        selectedFilter: [],
         item: {
             id: 'Business Capability 1',
             title: "Business Capability 1",
