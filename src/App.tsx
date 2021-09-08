@@ -1,22 +1,15 @@
 import React, {useEffect, useState} from "react";
-import styles from './App.styles';
-import {css} from 'aphrodite/no-important';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import styles from './App.styles';
+import {css} from 'aphrodite/no-important';
 import List from "./Components/List/List";
 import ApplicationData from "./Components/ApplicationData/ApplicationData";
-import {unique} from "./utils/arrayHelpers";
 import {Data} from "./shared/types/Data";
 import {sortByProperty} from "./utils/sortingHelpers";
 import {convertToTreeStructure} from "./utils/dataStructureHelpers";
-
-export type Dictionary<T> = Partial<{ [key: string]: T }>;
-
-// Use recursive type for children
-export interface NavigationData {
-    title: string;
-    children?: [NavigationData],
-}
+import {NavigationData} from "./shared/types/NavigationData";
+import {Dictionary} from "./shared/types/Dictionary";
 
 function App() {
     const [navigationData, setNavigationData] = useState<NavigationData[]>([]);
@@ -25,16 +18,6 @@ function App() {
     const [maxSpend, setMaxSpend] = useState<number>(0);
     const [minSpend, setMinSpend] = useState<number>(0);
     const [currentSpend, setCurrentSpend] = useState<number>(0);
-
-    const handleSliderChange = (val: number) => {
-        if (val === 100) {
-            return setCurrentSpend(maxSpend)
-        }
-        if (val === 0) {
-            return setCurrentSpend(minSpend)
-        }
-        return setCurrentSpend(maxSpend * Number(`0.${val}`))
-    }
 
     useEffect(() => {
         fetch('/data').then(res => {
@@ -60,6 +43,16 @@ function App() {
         })
     }, []);
 
+    const handleSliderChange = (val: number) => {
+        if (val === 100) {
+            return setCurrentSpend(maxSpend)
+        }
+        if (val === 0) {
+            return setCurrentSpend(minSpend)
+        }
+        return setCurrentSpend(maxSpend * Number(`0.${val}`))
+    }
+
     return (
         <div>
             <h1>Pharos Coding Exercise</h1>
@@ -78,6 +71,7 @@ function App() {
                     <h2>Filters</h2>
                     <span>spending</span>
                     <div className={css(styles.slider)}>
+                        {/* Cam create wrapper around this, test handleSliderChange*/}
                         <Slider
                             onChange={handleSliderChange}
                             min={0}

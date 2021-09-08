@@ -13,7 +13,9 @@ const ApplicationData = ({filteredData, selectedFilter, currentSpend}: Applicati
     return (<>
         {filteredData.filter(({BCAP1, BCAP2, BCAP3, spend}: Data) => {
             const result = [BCAP1, BCAP2, BCAP3] as string[];
-            return (selectedFilter.length === 0 && currentSpend >= spend) || currentSpend >= spend && (selectedFilter).every((item: string) => result.includes(item))
+            const hasNoFilterAndWithinCurrentSpend = (selectedFilter.length === 0 && currentSpend >= spend);
+            const isIncludedInFilterAndwithinCurrentSpend = currentSpend >= spend && (selectedFilter).every((item: string) => result.includes(item));
+            return hasNoFilterAndWithinCurrentSpend || isIncludedInFilterAndwithinCurrentSpend
         }).map(({id, name, BCAP1, BCAP2, BCAP3, spend}: Data) =>
             <div data-testid={id} key={id} className={css(styles.filteredData)}>
                 <span>{name}</span>
@@ -27,4 +29,4 @@ const ApplicationData = ({filteredData, selectedFilter, currentSpend}: Applicati
     </>)
 };
 
-export default ApplicationData
+export default ApplicationData;

@@ -1,6 +1,7 @@
 import {Data} from "../shared/types/Data";
 import {unique} from "./arrayHelpers";
-import {Dictionary, NavigationData} from "../App";
+import {NavigationData} from "../shared/types/NavigationData";
+import {Dictionary} from "../shared/types/Dictionary";
 
 export function convertToTreeStructure<T extends Data, U extends NavigationData>(data: T[]): Dictionary<U> {
     return data.reduce((acc, curr: T) => {

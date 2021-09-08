@@ -1,0 +1,1 @@
+export type Dictionary<T> = Partial<{ [key: string]: T }>;

@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from "react";
-import {NavigationData} from "../../App";
 import {css} from "aphrodite/no-important";
 import styles from './List.styles';
+import {NavigationData} from "../../shared/types/NavigationData";
 
 interface ListProps {
     id: string;
@@ -35,9 +35,9 @@ const List: React.FC<ListProps> = (props: ListProps) => {
         <h4 className={showChildren ? css(styles.activeChild) : css(styles.nonActiveChild)}>{props.item.title}</h4>
       </span>
             <div key={props.id} className={css(styles.listChildren)}>
-                {showChildren && (props.item.children ?? []).map((node: any) =>
+                {showChildren && (props.item.children ?? []).map((navItem: NavigationData) =>
                     <List selectedFilter={props.selectedFilter} setSelectedFilter={props.setSelectedFilter}
-                          item={node} id={`${node.title}- ${++guid}`}
+                          item={navItem} id={`${navItem.title}- ${++guid}`}
                     />)}
             </div>
         </div>
