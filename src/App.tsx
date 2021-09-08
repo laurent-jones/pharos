@@ -8,6 +8,7 @@ import ApplicationData from "./Components/ApplicationData/ApplicationData";
 import {unique} from "./utils/arrayHelpers";
 import {Data} from "./shared/types/Data";
 import {sortByProperty} from "./utils/sortingHelpers";
+import {convertToTreeStructure} from "./utils/dataStructureHelpers";
 
 export type Dictionary<T> = Partial<{ [key: string]: T }>;
 
@@ -38,29 +39,7 @@ function App() {
     useEffect(() => {
         fetch('/data').then(res => {
             res.json().then((response: Data[]) => {
-                    const navigationTree: Dictionary<NavigationData> = response.reduce((acc, curr: Data) => {
-                        if (!acc[curr.BCAP1]) {
-                            const getChildren = (bcap2title: string) =>
-                                response
-                                    .filter((data: Data) => data.BCAP1 === curr.BCAP1 && bcap2title === data.BCAP2)
-                                    .map((filteredData: Data) => filteredData.BCAP3)
-                                    .filter(unique)
-                                    .sort()
-                                    .map((bcapTitle: string) => ({title: bcapTitle}));
-                            const sortedBCAP2 = response
-                                .filter((data: Data) => data.BCAP1 === curr.BCAP1)
-                                .map((filteredData: Data) => filteredData.BCAP2)
-                                .filter(unique)
-                                .sort()
-                                .map((bcapTitle: string) => ({title: bcapTitle, children: getChildren(bcapTitle)}));
-
-                            acc = {
-                                ...acc,
-                                [curr.BCAP1]: {title: curr.BCAP1, children: sortedBCAP2}
-                            } as Dictionary<NavigationData>;
-                        }
-                        return acc;
-                    }, {} as Dictionary<NavigationData>);
+                    const navigationTree: Dictionary<NavigationData> = convertToTreeStructure(response);
                     setMaxSpend(Math.max.apply(Math, response.map((data: Data) => {
                         return data.spend;
                     })));
