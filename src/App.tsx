@@ -62,7 +62,7 @@ function App() {
                     {navigationData.map((navItem: NavigationData, idx: number) =>
                         <div key={navItem.title}>
                             <List
-                                id={`${navItem.title}- ${idx.toString()}`}
+                                id={`${navItem.title}-${idx}`}
                                 item={navItem}
                                 selectedFilter={selectedFilter}
                                 setSelectedFilter={setSelectedFilter}/>

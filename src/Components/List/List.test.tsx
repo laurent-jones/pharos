@@ -24,7 +24,7 @@ describe('List', () => {
         const {asFragment} = render(<List {...defaultProps} />);
         expect(asFragment()).toMatchSnapshot();
     });
-    it('renders parent item only when parent is not clicked', async () => {
+    it('only renders parent item when parent is not clicked', async () => {
         const {queryByTestId} = render(<List {...defaultProps} />);
         expect(queryByTestId('Business Capability 1')).toBeInTheDocument();
         expect(queryByTestId('Business Capability 1.1')).not.toBeInTheDocument();

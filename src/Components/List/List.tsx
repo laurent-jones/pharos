@@ -11,8 +11,10 @@ interface ListProps {
 }
 
 const List: React.FC<ListProps> = (props: ListProps) => {
+    console.log('rendering', props.id);
     const [showChildren, setShowChildren] = useState<boolean>(false);
-    const handleClick = useCallback(() => {
+    const handleClick = useCallback((e) => {
+        // e.stopPropagation();
         setShowChildren(!showChildren);
         let selectedFilteredList = props.selectedFilter;
 
@@ -37,7 +39,7 @@ const List: React.FC<ListProps> = (props: ListProps) => {
             <div key={props.id} className={css(styles.listChildren)}>
                 {showChildren && (props.item.children ?? []).map((navItem: NavigationData) =>
                     <List selectedFilter={props.selectedFilter} setSelectedFilter={props.setSelectedFilter}
-                          item={navItem} id={`${navItem.title}- ${++guid}`}
+                          item={navItem} id={`${navItem.title}-${++guid}`}
                     />)}
             </div>
         </div>

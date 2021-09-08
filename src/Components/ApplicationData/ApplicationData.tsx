@@ -1,7 +1,7 @@
 import {css} from "aphrodite/no-important";
-import styles from "../../App.styles";
 import React from "react";
 import {Data} from "../../shared/types/Data";
+import styles from './ApplicationData.styles';
 
 interface ApplicationDataProps {
     filteredData: Data[];
