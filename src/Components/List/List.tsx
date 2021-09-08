@@ -14,7 +14,6 @@ const List: React.FC<ListProps> = (props: ListProps) => {
     console.log('rendering', props.id);
     const [showChildren, setShowChildren] = useState<boolean>(false);
     const handleClick = useCallback((e) => {
-        // e.stopPropagation();
         setShowChildren(!showChildren);
         let selectedFilteredList = props.selectedFilter;
 
