@@ -10,34 +10,33 @@ interface ListProps {
     setSelectedFilter(filters: string[]): void;
 }
 
-const List: React.FC<ListProps> = (props: ListProps) => {
-    console.log('rendering', props.id);
+const List = ({id, selectedFilter, item, setSelectedFilter}: ListProps) => {
     const [showChildren, setShowChildren] = useState<boolean>(false);
     const handleClick = useCallback((e) => {
         setShowChildren(!showChildren);
-        let selectedFilteredList = props.selectedFilter;
+        let selectedFilteredList = selectedFilter;
 
-        if (props.selectedFilter.includes(props.item.title)) {
-            const index = selectedFilteredList.indexOf(props.item.title);
+        if (selectedFilter.includes(item.title)) {
+            const index = selectedFilteredList.indexOf(item.title);
             if (index > -1) {
                 selectedFilteredList.splice(index, 1);
-                return props.setSelectedFilter([...selectedFilteredList]);
+                return setSelectedFilter([...selectedFilteredList]);
             }
         }
-        props.setSelectedFilter([...selectedFilteredList, props.item.title]);
+        setSelectedFilter([...selectedFilteredList, item.title]);
     }, [showChildren, setShowChildren]);
     // generate real GUID for better reconciliation process
     let guid = 1;
     return (
-        <div key={props.id}>
+        <div key={id}>
       <span
-          data-testid={props.item.title}
+          data-testid={item.title}
           className={css(styles.titleContainer)} onClick={handleClick}>
-        <h4 className={showChildren ? css(styles.activeChild) : css(styles.nonActiveChild)}>{props.item.title}</h4>
+        <h4 className={showChildren ? css(styles.activeChild) : css(styles.nonActiveChild)}>{item.title}</h4>
       </span>
-            <div key={props.id} className={css(styles.listChildren)}>
-                {showChildren && (props.item.children ?? []).map((navItem: NavigationData) =>
-                    <List selectedFilter={props.selectedFilter} setSelectedFilter={props.setSelectedFilter}
+            <div key={id} className={css(styles.listChildren)}>
+                {showChildren && (item.children ?? []).map((navItem: NavigationData) =>
+                    <List selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter}
                           item={navItem} id={`${navItem.title}-${++guid}`}
                     />)}
             </div>
