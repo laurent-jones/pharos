@@ -7,6 +7,7 @@ import List from "./Components/List/List";
 import ApplicationData from "./Components/ApplicationData/ApplicationData";
 import {unique} from "./utils/arrayHelpers";
 import {Data} from "./shared/types/Data";
+import {sortByProperty} from "./utils/sortingHelpers";
 
 export type Dictionary<T> = Partial<{ [key: string]: T }>;
 
@@ -70,15 +71,7 @@ function App() {
                         return data.spend;
                     })));
                     const navigationValues = Object.values(navigationTree) as NavigationData[];
-                    setNavigationData(navigationValues.sort((a: NavigationData, b: NavigationData) => {
-                        if (a.title < b.title) {
-                            return -1;
-                        }
-                        if (a.title > b.title) {
-                            return 1;
-                        }
-                        return 0;
-                    }));
+                    setNavigationData(navigationValues.sort((a, b) => sortByProperty(a.title, b.title)));
                     setFilteredData(response);
                 }
             );
